@@ -20,7 +20,7 @@ import { cartViewsRouter } from "./routes/cart.views.router.js";
 // Importación de las rutas de session:
 import { sessionViewsRouter } from "./routes/session.views.router.js";
 // Importación de la conexión a la base de datos de Mongo Atlas:
-import "./mongoDB.js";
+import "./database.js";
 // Importación de Express Session:
 import session from "express-session";
 // Importación de Mongo Connect para guardar las sesiones de usuario:
@@ -29,6 +29,8 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 // Importación de la función para inicializar Passport:
 import initializePassport from "./config/passport.config.js";
+// Importación del objeto de configuración:
+import configObject from "./config/dotenv.config.js";
 
 // MIDDLEWARES:
 // Directorio raíz desde el cual Express servirá los archivos estáticos cuando se realicen solicitudes HTTP:
@@ -38,6 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 // Función que permite comunicarnos con el servidor en formato JSON:
 app.use(express.json());
 // Middleware de express session:
+const { mongo_url } = configObject;
 app.use(
   session({
     secret: "secretCoder",
@@ -47,8 +50,7 @@ app.use(
     saveUninitialized: true,
     // Configuración de Mongo Store:
     store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://mchouhy:coderhouse@cluster0.uc50yks.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0",
+      mongoUrl: mongo_url,
       ttl: 100,
     }),
   })
