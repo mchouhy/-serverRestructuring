@@ -11,6 +11,7 @@ dotenv.config({
 
 const configObject = {
   mongo_url: process.env.MONGO_DB_KEY,
+  port: process.env.PORT,
 };
 
 export default configObject;

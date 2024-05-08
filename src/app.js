@@ -3,8 +3,6 @@
 import express from "express";
 // Creación de la app que utilizará Express JS y Handlebars:
 const app = express();
-// Número de puerto del servidor:
-const PORT = 8080;
 // Importación del motor de plantillas Handlebars (https://www.npmjs.com/package/express-handlebars):
 import { engine } from "express-handlebars";
 // Importación de las rutas del api de productos:
@@ -32,6 +30,9 @@ import initializePassport from "./config/passport.config.js";
 // Importación del objeto de configuración:
 import configObject from "./config/dotenv.config.js";
 
+// Variables env:
+const { mongo_url, port } = configObject;
+
 // MIDDLEWARES:
 // Directorio raíz desde el cual Express servirá los archivos estáticos cuando se realicen solicitudes HTTP:
 app.use(express.static("./src/public"));
@@ -40,7 +41,6 @@ app.use(express.urlencoded({ extended: true }));
 // Función que permite comunicarnos con el servidor en formato JSON:
 app.use(express.json());
 // Middleware de express session:
-const { mongo_url } = configObject;
 app.use(
   session({
     secret: "secretCoder",
@@ -90,6 +90,6 @@ app.get("/", (request, response) => {
 
 // PUERTO:
 // Función que escucha cualquier cambio en el servidor:
-app.listen(PORT, () =>
-  console.log(`Escuchando cualquier cambio en el puerto: localhost:${PORT}`)
+app.listen(port, () =>
+  console.log(`Escuchando cualquier cambio en el puerto: localhost:${port}`)
 );
