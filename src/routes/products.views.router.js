@@ -3,15 +3,15 @@ import { Router } from "express";
 // Creación del Router de Express JS:
 const productsViewsRouter = Router();
 // Importación del manejador de productos:
-import { ProductManager } from "../controllers/productManager.js";
-// Llamado de la función de productManager:
-const productManager = new ProductManager();
+import { ProductService } from "../services/productService.js";
+// Llamado de la función de productService:
+const productService = new ProductService();
 
 // Ruta GET para renderizar los productos:
 productsViewsRouter.get("/", async (request, response) => {
   let { limit = 2, page = 1, sort, query } = request.query;
   try {
-    const products = await productManager.getProducts({
+    const products = await productService.getProducts({
       limit: parseInt(limit),
       page: parseInt(page),
       sort,

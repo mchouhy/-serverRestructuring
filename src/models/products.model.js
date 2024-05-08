@@ -42,5 +42,5 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-// Exportación del model para utilizarlo en productManager.js. En model se pasa como primer argumento el nombre de la colección y como segundo el "Schema":
+// Exportación del model para utilizarlo en productService.js. En model se pasa como primer argumento el nombre de la colección y como segundo el "Schema":
 export const productModel = mongoose.model("Product", productSchema);

@@ -8,9 +8,9 @@ import { createHash, isValidPassword } from "../utils/hashbcrypt.js";
 // Importación de la estrategia de github de passport:
 import GitHubStrategy from "passport-github2";
 // Importación del CartManager:
-import { CartManager } from "../controllers/cartManager.js";
+import { CartService } from "../services/cartService.js";
 // Llamado de la función CartManager:
-const cartManager = new CartManager();
+const cartService = new CartService();
 
 const initializePassport = () => {
   // Creación de la estrategia de passport para el registro de usuarios:
@@ -30,7 +30,7 @@ const initializePassport = () => {
           // Validación si existe el usuario:
           let user = await UserModel.findOne({ email });
           if (user) return done(null, false);
-          const cart = await cartManager.createCart();
+          const cart = await cartService.createCart();
           // Validación en caso de que no exista el usuario:
           let newUser = {
             first_name,

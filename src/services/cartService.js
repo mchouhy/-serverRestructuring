@@ -2,7 +2,7 @@
 import { cartModel } from "../models/carts.model.js";
 
 //Función de clase constructora que recibe la ruta a trabajar desde el momento de generar la instancia.
-export class CartManager {
+export class CartService {
   createCart = async () => {
     try {
       // Variable que aloja el nuevo carrito:
